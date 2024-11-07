@@ -1,23 +1,29 @@
-luke
-====
+# Luke
 
 ![Luke, the Lucene Toolbox Project](src/main/resources/img/luke-big.gif)
 
-This is mavenised version of Luke tool maintained and further developed by Dmitry Kan (this repo owner).
+This is a fork of the old Luke version [4.8.0.1](https://github.com/DmitryKey/luke/tree/4.8.0.1).
+This project allows reading indexes created by Apache Jackrabbit Oak indexes.
 
-* The original author is Andrzej Bialecki (https://code.google.com/p/luke)
-* The project has been mavenized by Neil Ireson (see google group discussion here: http://bit.ly/16Y8utO)
-* The project has been ported to Lucene trunk (marked as 5.0 at the time) by Dmitry Kan
-* The project has been back-ported to Lucene 4.3 by sonarname, who later decided not to continue supporting the project
-* There are updates to the (non-mavenized) project done by tarzanek (https://github.com/tarzanek/luke)
+The project Apache Jackrabbit Oak uses the old version of Apache Lucene [4.7.2](https://github.com/apache/jackrabbit-oak/blob/trunk/oak-parent/pom.xml).
 
-This project's goal is:
+`OakCodec simply mimics Lucene46Codec but with uncompressed StoredFieldsFormat` ([source](https://github.com/apache/jackrabbit-oak/blob/trunk/oak-lucene/src/main/java/org/apache/jackrabbit/oak/plugins/index/lucene/OakCodec.java))
 
-0. Keep the project mavenized (compatible with Apache Lucene and Solr style)
-1. To port the thinlet UI to an ASL compliant license framework so that it can be contributed back to Apache Lucene.
-   Current work is done with GWT 2.5.1.
-2. To revive the project and establish a single point of trust for the development and updates of the tool. This said,
-   everyone is welcome to join.
+This project solve the annoying problem of reading the indexes of Apache Jackrabbit Oak with the standard Luke version:
+```
+Invalid directory at the location, check console for more information. Last exception:
+java.lang.IllegalArgumentException: A SPI class of type org.apache.lucene.codecs.Codec with name 'oakCodec' does not exist. You need to add the corresponding JAR file supporting this SPI to your classpath.The current classpath supports the following names: [Lucene40, Lucene3x, Lucene41, Lucene42, Lucene45, Lucene46]
+```
 
+![fixed.png](fixed.png)
 
-There are other more technical goals, that will get updated here as they get into the shape.
+## How to build
+Use Java 8 to build the project.
+```sh
+mvn clean package
+```
+
+## Run the application
+```sh
+java -jar target/luke-oak-4.8.0.jar
+```

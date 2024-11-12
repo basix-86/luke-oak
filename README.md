@@ -1,4 +1,4 @@
-# Luke
+# Luke-OAK
 
 ![Luke, the Lucene Toolbox Project](src/main/resources/img/luke-big.gif)
 
